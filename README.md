@@ -61,10 +61,3 @@ Contributions to this project are welcome. You can contribute by:
 Reporting bugs
 Suggesting enhancements
 Submitting pull requests with improvements to the code or documentation
-License
-
-This project is licensed under the MIT License. Feel free to use, modify, and distribute the code as you see fit.
-
-Contact
-
-For more information or to get involved, please contact [Your Name] at [Your Email]. Follow the project updates and discussions on [GitHub Discussions or Issues Link].

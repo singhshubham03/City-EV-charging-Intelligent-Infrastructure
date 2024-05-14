@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Charging Stations Map - Palo Alto Region</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            overflow: hidden;
+
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: calibri;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #27864e;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .navbar a.right {
+            float: right;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: calibri;
+            font-size: 70px;
+            margin: 30px auto;
+            /* Vertical margins 20px, horizontal margins auto */
+            color: #333;
+        }
+
+
+
+        h2,
+        p,
+        ul label,
+        input,
+        button {
+            margin: 20px;
+        }
+
+        h2 {
+            font-family: calibri;
+            font-size: 40px;
+            margin-top: 55px;
+            /* Vertical margins 20px, horizontal margins auto */
+            color: #333;
+        }
+
+        label {
+            font-size: x-large;
+            margin-right: 3px;
+        }
+
+        input {
+            margin-left: 3px;
+            border-radius: 10px;
+            border-color: #27864e;
+            height: 30px;
+            width: 200px;
+        }
+
+        input[type=text] {
+            padding-left: 10px;
+            font-size: larger;
+        }
+
+        #submit-btn {
+            padding: 8px;
+            background-color: #27864e;
+            color: white;
+            font-size: large;
+            width: 100px;
+        }
+
+        #map {
+            height: 600px;
+            margin: 20px auto;
+            width: 90%;
+            border: 0px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .dashboard-content {
+            height: fit-content;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .home-content {
+            margin-bottom: 20px;
+        }
+
+        .about-back {
+            background-color: rgba(255, 255, 255, 0.75);
+            margin: 10px 50px;
+            padding: 20px;
+        }
+
+        .about-content {
+            font-family: calibri;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .back-video {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .back-video {
+                height: auto;
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // Initially show the home content
+            $(".home-content").addClass("visible");
+
+            $(".navbar a").click(function () {
+                var target = $(this).attr("href").substr(1);
+                $(".content").removeClass("visible"); // hide all content
+                $("." + target + "-content").addClass("visible"); // show the clicked content
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <video autoplay muted plays-inline class="back-video">
+            <source src="backVideo1.mp4" type="video/mp4" />
+        </video>
+        <div class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about" class="right">About</a>
+            <a href="#dashboard" class="right">Dashboard</a>
+            <a href="https://github.com/singhshubham03/City-EV-charging-Intelligent-Infrastructure"
+                class="right">GitHub</a>
+        </div>
+        <div class="home-content content">
+            <h1>Charging Stations Map</h1>
+            <div class="input-box">
+                <label for="zip-code">Enter a zip code:</label>
+                <input type="text" id="zip-code" name="zip-code" />
+                <button id="submit-btn">Predict</button>
+            </div>
+            <div id="map"></div>
+            <script src="map3.js"></script>
+        </div>
+
+    </div>
+
+    <div class="dashboard-content content">
+        <h1>Palo Alto EV Charger Analysis</h1>
+        <div class='tableauPlaceholder' id='viz1715232354727' style='position: relative'>
+            <noscript><a href='#'><img alt='Palo Alto EV Charger Analysis '
+                        src='https://public.tableau.com/static/images/Pa/PaloAltoEVChargerAnalysis/PaloAltoEVChargerAnalysis/1_rss.png'
+                        style='border: none' /></a></noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='PaloAltoEVChargerAnalysis/PaloAltoEVChargerAnalysis' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image'
+                    value='https://public.tableau.com/static/images/Pa/PaloAltoEVChargerAnalysis/PaloAltoEVChargerAnalysis/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+                <param name='filter' value='publish=yes' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1715232354727');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; }
+            else if (divElement.offsetWidth > 500) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; }
+            else { vizElement.style.width = '100%'; vizElement.style.height = '1677px'; }
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+    </div>
+
+    <div class="about-content content">
+        <h1>About</h1>
+        <div class="about-back">
+        <p>This project focuses on the placement of Electric Vehicle Charging Stations (EVCS) in the Palo Alto region.
+            The goal is to analyze the existing charging infrastructure and forecast the future demand for charging
+            points in the area.</p>
+
+        <p>The map below visualizes the existing charging stations (marked in green) and the proposed new charging
+            stations (marked in blue) in the Palo Alto region. By entering a specific zip code, you can explore the
+            charging infrastructure in that particular area.</p>
+
+        <p>The data used in this project includes:</p>
+        <ul>
+            <li>Existing charging stations</li>
+            <li>Proposed new charging stations</li>
+            <li>Forecasted charging points for 2024 and 2025</li>
+        </ul>
+
+        <p>By analyzing this data, we aim to provide insights into the current state of the charging infrastructure and
+            help plan for future expansion to meet the growing demand for electric vehicle charging in the Palo Alto
+            region.</p>
+
+        <h2>Findings:</h2>
+        <p class="about-p">
+            To tackle the pressing issues of energy sustainability and environmental impact, the adoption of electric
+            vehicles has emerged as a viable solution.However, the growth of the EV market is frequently constrained by
+            insufficient charging infrastructure. This paper provides a data-driven analysis of existing EV charging facilities
+            to strategically plan future expansions. The research employs three distinct analytical approaches: predicting the
+            necessary increase in charging station ports using the BIRCH clustering algorithm with a Silhouette Score of 0.52,
+            forecasting the energy consumption of EV charging stations using an XGBoost regression model achieving an R-squared
+            value of 0.81,and determining optimal locations for new charging stations using a Decision Tree algorithm with an
+            R-squared of 0.94.These methods offer comprehensive support for urban planning and environmental sustainability
+            initiatives,enabling informed decision-making to facilitate the integration of EVs into the urban landscape
+            and promote environmental sustainability.
+        </p>
+    </div>
+    </div>
+</body>
+
+</html>
